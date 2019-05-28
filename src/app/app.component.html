@@ -1,9 +1,44 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu *ngIf="authService.isAuthenticated()">
       <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
+        <ion-toolbar class="user-profile">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div class="user-avatar">
+                  <ion-icon
+                    ios="ios-contact"
+                    md="ios-contact"
+                    class="avatar-icon"
+                  ></ion-icon>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <h2 ion-text class="no-margin bold text-white" text-wrap>
+                  {{ authService.getUserData().nomeUsuario }}
+                </h2>
+                <span class="no-margin bold text-white">{{
+                  authService.getRole() == "ROLE_RESP" ? "Responsável" : "Aluno"
+                }}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row no-padding class="other-data">
+              <ion-col no-padding class="column">
+                <ion-button
+                  expand="block"
+                  color="light"
+                  size="small"
+                  (click)="logout()"
+                >
+                  <ion-icon name="log-out"></ion-icon>
+                  Sair
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-toolbar>
       </ion-header>
       <ion-content>
@@ -12,7 +47,7 @@
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
-                {{p.title}}
+                {{ p.title }}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>

@@ -1,0 +1,91 @@
+<!--
+  Generated template for the AlunoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/mensagens" routerDirection="forward">
+        <ion-icon name="chatboxes"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Aluno</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="alunos"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-row align-itens-center>
+    <ion-col>
+      <ion-card no-margin margin-bottom class="full-width">
+        <ion-item class="border-bottom" text-wrap>
+          <ion-icon class="fa fa-user" color="primary" item-left></ion-icon>
+          <ion-label text-wrap>{{ aluno.nomeAluno }}</ion-label>
+        </ion-item>
+        <ion-item class="border-bottom" text-wrap>
+          <ion-icon
+            class="fa fa-graduation-cap"
+            color="primary"
+            item-left
+          ></ion-icon>
+          <ion-label text-wrap>{{ aluno.turma.nomeTurm }}</ion-label>
+        </ion-item>
+        <ion-item text-wrap>
+          <ion-icon name="home" color="primary" item-left></ion-icon>
+          <ion-label text-wrap>{{ aluno.turma.emeb.nomeEmeb }}</ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row align-itens-center>
+    <ion-col>
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="openGradeHorariaPage(aluno.codTurmAlun)"
+        >Grade Horária</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="openAtivAvalPage(aluno.codTurmAlun)"
+        >Atividades Avaliativas</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="openBoletimPage(aluno.codTurmAlun)"
+        >Boletim</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button
+        expand="block"
+        color="primary"
+        (click)="openFrequenciaPage(aluno.codTurmAlun)"
+        >Frequência</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row>
+    <ion-col>
+      <ion-button expand="block" color="primary" (click)="openEmebPage(aluno)">
+        Dados da EMEB
+      </ion-button>
+    </ion-col>
+  </ion-row> -->
+</ion-content>

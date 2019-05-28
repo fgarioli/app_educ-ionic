@@ -1,0 +1,13 @@
+.item > ion-icon:first-child,
+.item-inner > ion-icon:first-child {
+  text-align: center;
+  min-width: 40px;
+}
+
+ion-icon {
+  font-size: 1.4rem;
+}
+
+ion-item {
+  --inner-border-width: 0;
+}

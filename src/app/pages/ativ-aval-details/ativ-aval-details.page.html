@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ ativ.tipo }} de {{ ativ.disciplina }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="ativ-aval"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="md list-md hydrated">
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Trimestre: {{ ativ.periodo }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Data: {{ functions.dateFormat(ativ.dataAtiv) }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Valor: {{ ativ.valor }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Nota: {{ ativ.nota == "" ? ativ.notaDescr : ativ.nota }}</ion-label
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>

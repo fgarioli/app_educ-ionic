@@ -1,0 +1,86 @@
+<ion-content padding class="animated fadeIn auth">
+  <ion-grid style="position: relative">
+    <ion-row justify-content-center>
+      <ion-col
+        align-self-center
+        padding-horizontal
+        text-center
+        class="animated fadeInDown"
+      >
+        <div class="logo">
+          <img
+            src="../../../assets/img/educaci-logo-shadow.png"
+            alt="Logo Educaci"
+          />
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col align-self-center>
+        <form [formGroup]="formGroup" (ngSubmit)="login()">
+          <ion-grid>
+            <ion-row justify-content-center>
+              <ion-col align-self-center>
+                <ion-item class="item-radius">
+                  <ion-label><ion-icon name="person"></ion-icon></ion-label>
+                  <ion-input
+                    formControlName="username"
+                    type="text"
+                    placeholder="Login"
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="danger"
+                  *ngIf="
+                    formGroup.controls.username.dirty &&
+                    formGroup.controls.username.errors
+                  "
+                  margin-left
+                >
+                  Valor Inválido
+                </p>
+                <ion-item class="item-radius">
+                  <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+                  <ion-input
+                    formControlName="password"
+                    type="password"
+                    placeholder="Senha"
+                  ></ion-input>
+                </ion-item>
+                <p
+                  class="danger"
+                  *ngIf="
+                    formGroup.controls.password.dirty &&
+                    formGroup.controls.password.errors
+                  "
+                  margin-left
+                >
+                  Valor Inválido
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row justify-content-center>
+              <ion-col align-self-center>
+                <ion-button
+                  type="submit"
+                  expand="block"
+                  color="light"
+                  [disabled]="formGroup.invalid"
+                  ><ion-icon slot="start" name="log-in"></ion-icon
+                  >Entrar</ion-button
+                >
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <img
+    src="../../../assets/img/educaci.png"
+    alt="Educaci"
+    style="width: 75px;"
+  />
+</ion-footer>

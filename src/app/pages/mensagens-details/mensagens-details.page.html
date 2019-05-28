@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mensagem</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="mensagens"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="md list-md hydrated">
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Remetente: {{ msg.remetente }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Assunto: {{ msg.assunto }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Mensagem: {{ msg.mensagem }}</ion-label
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>

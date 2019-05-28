@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ diaSemana }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="alunos"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="md list-md hydrated" *ngFor="let tempo of tempos">
+    <ion-list-header> {{ tempo.tempo }}ª Aula</ion-list-header>
+    <ion-item>
+      <ion-label color="primary" class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Disciplina: {{ tempo.disciplina }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">Docente: {{ tempo.docente }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

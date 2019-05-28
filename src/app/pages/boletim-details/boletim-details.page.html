@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Boletim {{ boletim.disciplina }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="boletim"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="md list-md hydrated">
+    <ion-list-header>
+      1º Trimestre
+    </ion-list-header>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Nota: {{ boletim.notaTrim1 }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Faltas: {{ boletim.faltasTrim1 }}</ion-label
+      >
+    </ion-item>
+    <ion-item-divider></ion-item-divider>
+    <ion-list-header>
+      2º Trimestre
+    </ion-list-header>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Nota: {{ boletim.notaTrim2 }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Faltas: {{ boletim.faltasTrim2 }}</ion-label
+      >
+    </ion-item>
+    <ion-item-divider></ion-item-divider>
+    <ion-list-header>
+      3º Trimestre
+    </ion-list-header>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Nota: {{ boletim.notaTrim3 }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Faltas: {{ boletim.faltasTrim3 }}</ion-label
+      >
+    </ion-item>
+    <ion-item-divider></ion-item-divider>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Nota Final: {{ boletim.notaAnual }}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label
+        color="primary"
+        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+        >Total de Faltas: {{ boletim.totalFaltas }}</ion-label
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,31 +1,37 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Platform, MenuController } from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { AuthServiceProvider } from "./services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"]
 })
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: "Calendário Acadêmico",
+      url: "/calendario",
+      icon: "calendar"
     }
+    // {
+    //   title: 'List',
+    //   url: '/list',
+    //   icon: 'list'
+    // }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public authService: AuthServiceProvider,
+    private router: Router,
+    private menu: MenuController
   ) {
     this.initializeApp();
   }
@@ -35,5 +41,11 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  async logout() {
+    await this.menu.toggle();
+    await this.authService.logout();    
+    this.router.navigate(["/login"]);
   }
 }

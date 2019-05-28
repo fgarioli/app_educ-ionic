@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Grade Horária</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="alunos"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-list>
+    <ion-item
+      *ngFor="let item of diasSemana"
+      (click)="openGradeHorariaDetailsPage(item)"
+      detail="true"
+      class="ios in-list ion-focusable item-label hydrated"
+    >
+      {{ item.dia }}
+    </ion-item>
+  </ion-list>
+</ion-content>

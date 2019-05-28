@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button routerLink="/alunos" routerDirection="forward">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Calendário Acadêmico</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-calendar
+    [(ngModel)]="date"
+    [options]="optionsRange"
+    format="DD/MM/YYYY"
+    (select)="onSelect($event)"
+  ></ion-calendar>
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label text-wrap>{{ tipo ? date + " - " + tipo : date }}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="descricao">
+      <ion-col>
+        <ion-label text-wrap>{{ descricao }}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="periodo">
+      <ion-col>
+        <ion-label text-wrap>{{ periodo + "º" }}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <ion-list>
+    <ion-item class="ios in-list ion-focusable item-label hydrated">
+      {{ tipo ? date + " - " + tipo : date }}
+    </ion-item>
+    <ion-item class="ios in-list ion-focusable item-label hydrated" *ngIf="descricao">
+      {{ descricao }}
+    </ion-item>
+    <ion-item class="ios in-list ion-focusable item-label hydrated" *ngIf="periodo">
+      {{ periodo + "º" }}
+    </ion-item>
+  </ion-list>
+</ion-content>
