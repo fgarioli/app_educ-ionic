@@ -14,8 +14,8 @@ export class FrequenciaDetailsPage implements OnInit {
   functions: Functions = new Functions();
 
   constructor(private dataProvider: DataProvider) {
-    this.trimestre = this.dataProvider.storage.freq.trimestre;
-    this.aulas = this.dataProvider.storage.freq.aulas;
+    this.trimestre = this.dataProvider.storage.trimestre;
+    this.aulas = this.dataProvider.storage.aulas;
   }
 
   async ngOnInit() {}

@@ -1,5 +1,5 @@
 import { FrequenciaDTO } from "../../models/frequencia.dto";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { FrequenciaServiceProvider } from "src/app/services/frequencia.service";
 import { DataProvider } from "src/app/providers/data.provider";
@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
   templateUrl: "frequencia.page.html",
   styleUrls: ["./frequencia.page.scss"]
 })
-export class FrequenciaPage {
+export class FrequenciaPage implements OnInit {
   freqList: FrequenciaDTO[];
 
   constructor(
@@ -48,6 +48,6 @@ export class FrequenciaPage {
 
   openFrequenciaTrimestrePage(freq: FrequenciaDTO) {
     this.dataProvider.storage = { freq };
-    this.router.navigate(["frequencia-details"]);
+    this.router.navigate(["frequencia-trimestre"]);
   }
 }

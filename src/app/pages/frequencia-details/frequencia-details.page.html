@@ -9,43 +9,16 @@
 
 <ion-content padding class="animated fadeIn common-bg">
   <ion-list class="md list-md hydrated">
-    <ion-item *ngFor="let aula of aulas">
-      <ion-row>
-        <ion-col>
-          <ion-label
-            color="primary"
-            class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-            >Data: {{ functions.dateFormat(aula.data) }}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label
-            color="primary"
-            class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-            >Tempo: {{ aula.tempo }}º</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label
-            color="primary"
-            class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-            >Conteúdo: {{ aula.conteudo }}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label
-            color="primary"
-            class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-            >Presença: {{ aula.presenca ? "Presente" : "Ausente" }}</ion-label
-          >
-        </ion-col>
-      </ion-row>
+    <ion-item
+      class="item ios in-list ion-focusable item-label hydrated"
+      *ngFor="let aula of aulas"
+    >
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>Data: {{ functions.dateFormat(aula.data) }}</h2>
+        <h3>Tempo: {{ aula.tempo }}º</h3>
+        <h3>Presença: {{ aula.presenca ? "Presente" : "Ausente" }}</h3>
+        <p>Conteúdo: {{ aula.conteudo }}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

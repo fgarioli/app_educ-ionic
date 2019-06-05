@@ -18,7 +18,6 @@ export class FrequenciaServiceProvider {
 
   getAulasByTrimestre(freqAula: FrequenciaAulaDTO[], trimestre): FrequenciaAulaDTO[] {
     let listFreq = new Array();
-    console.log(freqAula);
     for(let aula of freqAula) {
       if (aula.periodo == trimestre) {
         listFreq.push(aula);

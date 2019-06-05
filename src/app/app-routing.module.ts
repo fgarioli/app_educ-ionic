@@ -60,6 +60,10 @@ const routes: Routes = [
     loadChildren: './pages/frequencia/frequencia.module#FrequenciaPageModule'
   },
   {
+    path: 'frequencia-trimestre',
+    loadChildren: './pages/frequencia-trimestre/frequencia-trimestre.module#FrequenciaTrimestrePageModule'
+  },
+  {
     path: 'frequencia-details',
     loadChildren: './pages/frequencia-details/frequencia-details.module#FrequenciaDetailsPageModule'
   }

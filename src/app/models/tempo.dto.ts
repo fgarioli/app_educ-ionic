@@ -3,4 +3,5 @@ export interface TempoDTO {
     disciplina: string;
     diaSemana: string;
     tempo: string;
+    turno: string;
 }
