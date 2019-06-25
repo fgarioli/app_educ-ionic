@@ -27,12 +27,14 @@ export class CalendarioPage implements OnInit {
       .findCalendarioByAno(environment.ano)
       .toPromise();
 
+    console.log(this.listCale);
+
     let _daysConfig: DayConfig[] = [];
 
     this.listCale.forEach(value => {
       _daysConfig.push({
         date: moment(value.dataCale).toDate(),
-        cssClass: "feriado"
+        cssClass: this.getColor(value)
       });
     });
 
@@ -56,6 +58,32 @@ export class CalendarioPage implements OnInit {
       this.periodo = cale.periodoCale ? `Período: ${cale.periodoCale}` : null;
       this.descricao = cale.descrCale;
       this.tipo = cale.tipoCale;
+    }
+  }
+
+  getColor(cale: CalendarioDTO) {
+    if (cale.idCale == "D") {
+      return "dialetivo";
+    } else if (cale.idCale == "I") {
+      return "inicio";
+    } else if (cale.idCale == "N") {
+      return "feriadon";
+    } else if (cale.idCale == "U") {
+      return "pfacultativo";
+    } else if (cale.idCale == "T") {
+      return "fim";
+    } else if (cale.idCale == "E") {
+      return "recesso";
+    } else if (cale.idCale == "P") {
+      return "planejamento";
+    } else if (cale.idCale == "R") {
+      return "result-final";
+    } else if (cale.idCale == "Z") {
+      return "conselho-classe";
+    } else if (cale.idCale == "X") {
+      return "plantao-pedagogico";
+    } else if (cale.idCale == "L") {
+      return "recuperacao-final";
     }
   }
 }

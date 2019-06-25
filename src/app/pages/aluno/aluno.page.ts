@@ -60,4 +60,15 @@ export class AlunoPage implements OnInit {
   // openEmebPage(aluno) {
   //   this.router.navigate(["/emeb", { aluno: aluno }]);
   // }
+
+  verificaBNC(): boolean {
+    if (
+      this.aluno.turma.nomeTurm.includes("3") ||
+      this.aluno.turma.nomeTurm.includes("4") ||
+      this.aluno.turma.nomeTurm.includes("5")
+    ) {
+      return false;
+    }
+    return true;
+  }
 }

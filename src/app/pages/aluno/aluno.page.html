@@ -6,11 +6,11 @@
 -->
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="primary">
+    <!-- <ion-buttons slot="primary">
       <ion-button routerLink="/mensagens" routerDirection="forward">
         <ion-icon name="chatboxes"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>Aluno</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="alunos"> </ion-back-button>
@@ -61,7 +61,7 @@
       >
     </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row *ngIf="verificaBNC()">
     <ion-col>
       <ion-button
         expand="block"

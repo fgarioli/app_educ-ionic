@@ -3,4 +3,5 @@ export interface CalendarioDTO {
     descrCale: string;
     tipoCale: string;
     periodoCale: string;
+    idCale: string;
 }
