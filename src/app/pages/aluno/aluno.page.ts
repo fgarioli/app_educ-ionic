@@ -40,7 +40,7 @@ export class AlunoPage implements OnInit {
 
   openAtivAvalPage(codTurmAlun) {
     this.data.storage = { codTurmAlun };
-    this.router.navigate(["ativ-aval"]);
+    this.router.navigate(["ativ-aval-disc"]);
   }
 
   openBoletimPage(codTurmAlun) {

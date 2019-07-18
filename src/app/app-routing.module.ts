@@ -48,6 +48,10 @@ const routes: Routes = [
     loadChildren: './pages/boletim-details/boletim-details.module#BoletimDetailsPageModule'
   },
   {
+    path: 'ativ-aval-disc',
+    loadChildren: './pages/ativ-aval-disc/ativ-aval-disc.module#AtivAvalDiscPageModule'
+  },
+  {
     path: 'ativ-aval',
     loadChildren: './pages/ativ-aval/ativ-aval.module#AtivAvalPageModule'
   },

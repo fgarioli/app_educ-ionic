@@ -13,39 +13,17 @@ import { AtivServiceProvider } from "src/app/services/ativ.service";
 })
 export class AtivAvalPage implements OnInit {
   listAtiv: AtividadeAvaliativaDTO[];
+  disc;
   private functions: Functions = new Functions();
 
   constructor(
     private dataProvider: DataProvider,
-    private router: Router,
-    private ativService: AtivServiceProvider,
-    private alertController: AlertController
+    private router: Router
   ) {}
 
   async ngOnInit() {
-    let codTurmAlun = this.dataProvider.storage.codTurmAlun;
-    let res = await this.ativService
-      .findByTurmAlunIdTrimestre(codTurmAlun)
-      .toPromise();
-
-    if (res && res.length > 0) {
-      this.listAtiv = res;
-    } else {
-      const alert = await this.alertController.create({
-        header: "Nenhuma atividade encontrada.",
-        message: "Por favor entre em contato com a EMEB para mais informações.",
-        buttons: [
-          {
-            text: "Ok",
-            handler: () => {
-              this.router.navigate(["aluno"]);
-            }
-          }
-        ]
-      });
-
-      await alert.present();
-    }
+    this.listAtiv = this.dataProvider.storage.ativs;
+    this.disc = this.dataProvider.storage.disc;
   }
 
   openAtivAvalDetailsPage(ativ: AtividadeAvaliativaDTO) {
