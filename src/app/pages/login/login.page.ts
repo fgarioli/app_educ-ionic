@@ -1,10 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import {
-  LoadingController,
-  AlertController
-} from "@ionic/angular";
+import { LoadingController, AlertController, Platform } from "@ionic/angular";
 import { AuthServiceProvider } from "../../services/auth.service";
 
 @Component({
@@ -13,7 +10,10 @@ import { AuthServiceProvider } from "../../services/auth.service";
   styleUrls: ["login.page.scss"]
 })
 export class LoginPage implements OnInit {
-  formGroup: FormGroup;
+  formGroup: FormGroup = this.formBuilder.group({
+    username: ["", [Validators.required]],
+    password: ["", [Validators.required]]
+  });
 
   constructor(
     private router: Router,
@@ -23,12 +23,8 @@ export class LoginPage implements OnInit {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {
-    this.authService.logout();
-    this.formGroup = this.formBuilder.group({
-      username: ["", [Validators.required]],
-      password: ["", [Validators.required]]
-    });
+  async ngOnInit() {
+    this.formGroup.reset();
   }
 
   async login() {
@@ -40,15 +36,12 @@ export class LoginPage implements OnInit {
 
       await loading.present();
 
-      await this.authService.login(this.formGroup.value);
-      this.formGroup.reset();
-      
-      if (this.authService.getRole() == "ROLE_RESP") {        
+      let user_data = await this.authService.login(this.formGroup.value);
+
+      if (user_data.role == "ROLE_RESP") {
         this.router.navigate(["alunos"]);
-      } else if (this.authService.getRole() == "ROLE_ALUN") {
-        this.router.navigate([
-          `/aluno/${this.authService.getUserData().codUsuario}`
-        ]);
+      } else if (user_data.role == "ROLE_ALUN") {
+        this.router.navigate([`/aluno/${user_data.user.codUsuario}`]);
       }
 
       await loading.dismiss();

@@ -30,7 +30,7 @@ export class FrequenciaPage implements OnInit {
       this.freqList = res;
     } else {
       const alert = await this.alertController.create({
-        header: "Nenhum registro de frquência encontrado.",
+        header: "Nenhum registro de frequência encontrado.",
         message: "Por favor entre em contato com a EMEB para mais informações.",
         buttons: [
           {

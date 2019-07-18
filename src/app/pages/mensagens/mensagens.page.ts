@@ -1,4 +1,3 @@
-import { MensagensDetailsPage } from "../mensagens-details/mensagens-details.page";
 import { MensagemDTO } from "../../models/mensagem.dto";
 import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
@@ -27,8 +26,9 @@ export class MensagensPage implements OnInit {
 
   async ngOnInit() {
     try {
+      let user_data = await this.authService.getUserData();
       let res = await this.msgService
-        .findMensagemByUsuario(this.authService.getUserData().codUsuario)
+        .findMensagemByUsuario(user_data.user.codUsuario)
         .toPromise();
 
       if (res && res.length > 0) {

@@ -1,6 +1,6 @@
 import * as moment from "moment";
 
-export class Functions {
+export default class Functions {
   dateFormat(date: string) {
     return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
   }

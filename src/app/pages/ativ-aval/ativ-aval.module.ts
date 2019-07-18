@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
+import { AtivAvalPage } from "./ativ-aval.page";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import AtivAvalPage from "./ativ-aval.page";
 
 @NgModule({
   imports: [

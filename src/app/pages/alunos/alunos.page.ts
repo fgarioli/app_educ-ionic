@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { TurmAlunDTO } from "../../models/turmalun.dto";
 import { TurmalunServiceProvider } from "../../services/turmalun.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { DataProvider } from "src/app/providers/data.provider";
 import { environment } from "src/environments/environment";
-import { AuthServiceProvider } from 'src/app/services/auth.service';
+import { AuthServiceProvider } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-alunos",
@@ -19,13 +19,13 @@ export class AlunosPage implements OnInit {
   constructor(
     private router: Router,
     private data: DataProvider,
-    private activatedRoute: ActivatedRoute,
     private turmAlunService: TurmalunServiceProvider,
     private authService: AuthServiceProvider
   ) {}
 
   async ngOnInit() {
-    this.id = this.authService.getUserData().codUsuario;
+    let user_data = await this.authService.getUserData();
+    this.id = user_data.user.codUsuario;
     // this.id = this.activatedRoute.snapshot.paramMap.get("id");
 
     this.items = await this.turmAlunService

@@ -1,12 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 // import { MensagensPage } from "../mensagens/mensagens.page";
 // import { EmebPage } from "../emeb/emeb.page";
 // import { FrequenciaPage } from "../frequencia/frequencia";
 // import { BoletimPage } from "../boletim/boletim.page";
 import { TurmAlunDTO } from "../../models/turmalun.dto";
-import { ActivatedRoute, Router } from "@angular/router";
-import { TurmalunServiceProvider } from "src/app/services/turmalun.service";
+import { Router } from "@angular/router";
 import { DataProvider } from "src/app/providers/data.provider";
 
 @Component({
@@ -19,8 +18,7 @@ export class AlunoPage implements OnInit {
 
   constructor(
     private data: DataProvider,
-    private router: Router,
-    private turmAlunService: TurmalunServiceProvider
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -33,8 +31,6 @@ export class AlunoPage implements OnInit {
     //     .findByAluno(this.id, "2018")
     //     .toPromise();
     // }
-
-    console.log(this.aluno);
   }
 
   openGradeHorariaPage(codTurmAlun) {
@@ -62,13 +58,6 @@ export class AlunoPage implements OnInit {
   // }
 
   verificaBNC(): boolean {
-    if (
-      this.aluno.turma.nomeTurm.includes("3") ||
-      this.aluno.turma.nomeTurm.includes("4") ||
-      this.aluno.turma.nomeTurm.includes("5")
-    ) {
-      return false;
-    }
     return true;
   }
 }

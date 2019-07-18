@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-
 import { Platform, MenuController } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
@@ -18,11 +17,6 @@ export class AppComponent {
       url: "/calendario",
       icon: "calendar"
     }
-    // {
-    //   title: 'List',
-    //   url: '/list',
-    //   icon: 'list'
-    // }
   ];
 
   constructor(
@@ -36,16 +30,19 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  async initializeApp() {
+    await this.authService.checkToken();
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(["alunos"]);
+    }
+    await this.platform.ready();
+    this.statusBar.show();
+    this.splashScreen.hide();
   }
 
   async logout() {
     await this.menu.toggle();
-    await this.authService.logout();    
-    this.router.navigate(["/login"]);
+    await this.authService.logout();
+    await this.router.navigate(["/login"]);
   }
 }

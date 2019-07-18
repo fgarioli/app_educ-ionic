@@ -1,8 +1,7 @@
-import { Functions } from "../../utils/functions.utils";
+import Functions from "../../utils/functions.utils";
 import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { AtividadeAvaliativaDTO } from "../../models/ativ.dto";
-import * as moment from "moment";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
 import { AtivServiceProvider } from "src/app/services/ativ.service";
@@ -12,9 +11,9 @@ import { AtivServiceProvider } from "src/app/services/ativ.service";
   templateUrl: "ativ-aval.page.html",
   styleUrls: ["./ativ-aval.page.scss"]
 })
-export default class AtivAvalPage implements OnInit {
-  functions: Functions = new Functions();
+export class AtivAvalPage implements OnInit {
   listAtiv: AtividadeAvaliativaDTO[];
+  private functions: Functions = new Functions();
 
   constructor(
     private dataProvider: DataProvider,

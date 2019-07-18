@@ -18,10 +18,10 @@
             <ion-row>
               <ion-col>
                 <h2 ion-text class="no-margin bold text-white" text-wrap>
-                  {{ authService.getUserData().nomeUsuario }}
+                  {{ authService.getUserData() ? authService.getUserData().user.nomeUsuario : "" }}
                 </h2>
                 <span class="no-margin bold text-white">{{
-                  authService.getRole() == "ROLE_RESP" ? "Responsável" : "Aluno"
+                  authService.getUserData() ? (authService.getUserData().role == "ROLE_RESP" ? "Responsável" : "Aluno") : ""
                 }}</span>
               </ion-col>
             </ion-row>

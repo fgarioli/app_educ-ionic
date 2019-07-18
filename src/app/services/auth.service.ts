@@ -1,6 +1,4 @@
-import { UsuarioDTO } from "../models/usuario.dto";
 import { CredenciaisDTO } from "../models/credenciais.dto";
-import { Platform } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -15,43 +13,34 @@ const TOKEN_KEY = "access_token";
 })
 export class AuthServiceProvider {
   private authState = new BehaviorSubject(false);
-
-  private user: UsuarioDTO = null;
-  private role = null;
+  private userData = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient,
-    private platform: Platform,
     private storage: Storage,
     private helper: JwtHelperService
-  ) {
-    this.platform.ready().then(() => {
-      this.checkToken();
-    });
-  }
+  ) {}
 
   async login(cred: CredenciaisDTO) {
     let res = await this.http
       .post(
         `${environment.api}/login`,
-        {},
+        `username=${cred.username}&password=${cred.password}`,
         {
           headers: new HttpHeaders().set(
             "Content-Type",
             "application/x-www-form-urlencoded"
           ),
-          params: {
-            username: cred.username,
-            password: cred.password,
-            grant_type: "access_token"
-          },
+          params: { grant_type: "access_token" },
           observe: "response",
           responseType: "text"
         }
       )
       .toPromise();
 
-    await this.sucessfullLogin(res.headers.get("Authorization"));
+    let token = res.headers.get("Authorization");
+
+    return await this.sucessfullLogin(token.substring(7));
   }
 
   async refreshToken() {
@@ -71,21 +60,31 @@ export class AuthServiceProvider {
       )
       .toPromise();
 
-    await this.sucessfullLogin(res.headers.get("Authorization"));
+    let token = res.headers.get("Authorization");
+
+    return await this.sucessfullLogin(token.substring(7));
   }
 
   private async sucessfullLogin(authValue: string) {
-    authValue = authValue.substring(7);
+    let decoded = this.helper.decodeToken(authValue);
+    await this.storage.set("user_data", {
+      role: decoded["authorities"][0]["authority"],
+      user: decoded["user_data"]
+    });
     await this.storage.set(TOKEN_KEY, authValue);
 
-    let decoded = this.helper.decodeToken(authValue);
-    this.user = decoded["user_data"];
-    this.role = decoded["authorities"][0]["authority"];
     this.authState.next(true);
+    this.userData.next({
+      role: decoded["authorities"][0]["authority"],
+      user: decoded["user_data"]
+    });
+
+    return await this.getUserData();
   }
 
   async logout() {
     await this.storage.remove(TOKEN_KEY);
+    await this.storage.remove("user_data");
     this.authState.next(false);
   }
 
@@ -93,14 +92,12 @@ export class AuthServiceProvider {
     let token = await this.storage.get(TOKEN_KEY);
 
     if (token) {
-      let decoded = this.helper.decodeToken(token);
       let isExpired = this.helper.isTokenExpired(token);
 
       if (!isExpired) {
-        this.user = decoded;
-        this.authState.next(true);
+        await this.sucessfullLogin(token);
       } else {
-        await this.storage.remove(TOKEN_KEY);
+        await this.logout();
       }
     }
   }
@@ -113,11 +110,7 @@ export class AuthServiceProvider {
     return this.storage.get(TOKEN_KEY);
   }
 
-  getRole() {
-    return this.role;
-  }
-
-  getUserData(): UsuarioDTO {
-    return this.user;
+  getUserData() {
+    return this.userData.getValue();
   }
 }

@@ -1,5 +1,5 @@
 import { FrequenciaAulaDTO } from "../../models/frequencia-aula.dto";
-import { Functions } from "../../utils/functions.utils";
+import Functions from "../../utils/functions.utils";
 import { Component, OnInit } from "@angular/core";
 import { DataProvider } from "src/app/providers/data.provider";
 
@@ -11,7 +11,7 @@ import { DataProvider } from "src/app/providers/data.provider";
 export class FrequenciaDetailsPage implements OnInit {
   aulas: FrequenciaAulaDTO[];
   trimestre;
-  functions: Functions = new Functions();
+  private functions: Functions = new Functions();
 
   constructor(private dataProvider: DataProvider) {
     this.trimestre = this.dataProvider.storage.trimestre;

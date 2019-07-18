@@ -1,4 +1,4 @@
-import { Functions } from "../../utils/functions.utils";
+import Functions from "../../utils/functions.utils";
 import { AtividadeAvaliativaDTO } from "../../models/ativ.dto";
 import { Component, OnInit } from "@angular/core";
 import { DataProvider } from "src/app/providers/data.provider";

@@ -27,8 +27,6 @@ export class CalendarioPage implements OnInit {
       .findCalendarioByAno(environment.ano)
       .toPromise();
 
-    console.log(this.listCale);
-
     let _daysConfig: DayConfig[] = [];
 
     this.listCale.forEach(value => {
