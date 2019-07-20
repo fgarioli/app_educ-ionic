@@ -1,10 +1,8 @@
 import Functions from "../../utils/functions.utils";
 import { Component, OnInit } from "@angular/core";
-import { AlertController } from "@ionic/angular";
 import { AtividadeAvaliativaDTO } from "../../models/ativ.dto";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
-import { AtivServiceProvider } from "src/app/services/ativ.service";
 
 @Component({
   selector: "app-ativ-aval",

@@ -1,6 +1,6 @@
 import { BoletimDTO } from "../../models/boletim.dto";
 import { Component, OnInit } from "@angular/core";
-import { AlertController } from "@ionic/angular";
+import { AlertController, LoadingController } from "@ionic/angular";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
 import { BoletimServiceProvider } from "src/app/services/boletim.service";
@@ -17,15 +17,22 @@ export class BoletimPage implements OnInit {
     private dataProvider: DataProvider,
     private router: Router,
     private boletimService: BoletimServiceProvider,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadindCtrl: LoadingController
   ) {}
 
   async ngOnInit() {
+    let loading = null;
     try {
+      loading = await this.loadindCtrl.create({
+        message: "Carregando..."
+      });
+      await loading.present();
       let codTurmAlun = this.dataProvider.storage.codTurmAlun;
       let res = await this.boletimService
         .findBoletimByTurmAlunIdTrimestre(codTurmAlun)
         .toPromise();
+      await loading.dismiss();
 
       if (res && res.length > 0) {
         this.boletim = res;
@@ -47,6 +54,7 @@ export class BoletimPage implements OnInit {
         await alert.present();
       }
     } catch (error) {
+      await loading.dismiss();
       const alert = await this.alertController.create({
         header: error,
         buttons: [

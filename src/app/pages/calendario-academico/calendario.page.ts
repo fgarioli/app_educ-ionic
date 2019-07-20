@@ -4,6 +4,7 @@ import * as moment from "moment";
 import { CalendarioServiceProvider } from "src/app/services/calendario.service";
 import { CalendarioDTO } from "src/app/models/calendario.dto";
 import { environment } from "src/environments/environment";
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: "app-calendario",
@@ -18,9 +19,16 @@ export class CalendarioPage implements OnInit {
   tipo: string;
   descricao: string;
 
-  constructor(private caleService: CalendarioServiceProvider) {}
+  constructor(
+    private caleService: CalendarioServiceProvider,
+    private loadindCtrl: LoadingController
+  ) {}
 
   async ngOnInit() {
+    let loading = await this.loadindCtrl.create({
+      message: "Carregando..."
+    });
+    await loading.present();
     moment.locale("pt-BR");
 
     this.listCale = await this.caleService
@@ -45,6 +53,7 @@ export class CalendarioPage implements OnInit {
       to: moment(this.listCale[this.listCale.length - 1].dataCale).toDate(),
       daysConfig: _daysConfig
     };
+    await loading.dismiss();
   }
 
   onSelect($event) {

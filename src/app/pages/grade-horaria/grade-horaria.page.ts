@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { GradeHorariaServiceProvider } from "src/app/services/grade-horaria.service";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
-import { AlertController } from "@ionic/angular";
+import { AlertController, LoadingController } from "@ionic/angular";
 
 @Component({
   selector: "app-grade-horaria",
@@ -19,14 +19,20 @@ export class GradeHorariaPage implements OnInit {
     private dataProvider: DataProvider,
     private router: Router,
     public gradeHorariaService: GradeHorariaServiceProvider,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadindCtrl: LoadingController
   ) {}
 
   async ngOnInit() {
+    let loading = await this.loadindCtrl.create({
+      message: "Carregando..."
+    });
+    await loading.present();
     this.codTurmAlun = this.dataProvider.storage.codTurmAlun;
     let res = await this.gradeHorariaService
       .findByTurmAlun(this.codTurmAlun)
       .toPromise();
+    await loading.dismiss();
 
     if (res.diasSemana.length > 0 && res.tempos.length > 0) {
       this.grade = res;

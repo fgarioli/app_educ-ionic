@@ -1,7 +1,7 @@
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { LoadingController, AlertController, Platform } from "@ionic/angular";
+import { LoadingController, AlertController } from "@ionic/angular";
 import { AuthServiceProvider } from "../../services/auth.service";
 
 @Component({

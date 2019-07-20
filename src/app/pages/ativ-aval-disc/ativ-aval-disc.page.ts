@@ -1,6 +1,6 @@
 import Functions from "../../utils/functions.utils";
 import { Component, OnInit } from "@angular/core";
-import { AlertController } from "@ionic/angular";
+import { AlertController, LoadingController } from "@ionic/angular";
 import { AtividadeAvaliativaDTO } from "../../models/ativ.dto";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
@@ -20,14 +20,20 @@ export class AtivAvalDiscPage implements OnInit {
     private dataProvider: DataProvider,
     private router: Router,
     private ativService: AtivServiceProvider,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadindCtrl: LoadingController
   ) {}
 
   async ngOnInit() {
+    let loading = await this.loadindCtrl.create({
+      message: "Carregando..."
+    });
+    await loading.present();
     let codTurmAlun = this.dataProvider.storage.codTurmAlun;
     let res = await this.ativService
       .findByTurmAlunIdTrimestre(codTurmAlun)
       .toPromise();
+    await loading.dismiss();
 
     if (res && res.length > 0) {
       this.listAtiv = res;

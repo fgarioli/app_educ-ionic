@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { DataProvider } from "src/app/providers/data.provider";
 import { environment } from "src/environments/environment";
 import { AuthServiceProvider } from "src/app/services/auth.service";
+import { LoadingController } from "@ionic/angular";
 
 @Component({
   selector: "app-alunos",
@@ -20,10 +21,15 @@ export class AlunosPage implements OnInit {
     private router: Router,
     private data: DataProvider,
     private turmAlunService: TurmalunServiceProvider,
-    private authService: AuthServiceProvider
+    private authService: AuthServiceProvider,
+    private loadindCtrl: LoadingController
   ) {}
 
   async ngOnInit() {
+    let loading = await this.loadindCtrl.create({
+      message: "Carregando..."
+    });
+    await loading.present();
     let user_data = await this.authService.getUserData();
     this.id = user_data.user.codUsuario;
     // this.id = this.activatedRoute.snapshot.paramMap.get("id");
@@ -31,6 +37,7 @@ export class AlunosPage implements OnInit {
     this.items = await this.turmAlunService
       .findByResponsavel(this.id, environment.ano)
       .toPromise();
+    await loading.dismiss();
   }
 
   navigate(aluno: TurmAlunDTO) {

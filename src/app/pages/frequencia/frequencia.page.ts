@@ -1,6 +1,6 @@
 import { FrequenciaDTO } from "../../models/frequencia.dto";
 import { Component, OnInit } from "@angular/core";
-import { AlertController } from "@ionic/angular";
+import { AlertController, LoadingController } from "@ionic/angular";
 import { FrequenciaServiceProvider } from "src/app/services/frequencia.service";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
@@ -17,14 +17,20 @@ export class FrequenciaPage implements OnInit {
     private dataProvider: DataProvider,
     private router: Router,
     private alertController: AlertController,
-    private freqService: FrequenciaServiceProvider
+    private freqService: FrequenciaServiceProvider,
+    private loadindCtrl: LoadingController
   ) {}
 
   async ngOnInit() {
+    let loading = await this.loadindCtrl.create({
+      message: "Carregando..."
+    });
+    await loading.present();
     let codTurmAlun = this.dataProvider.storage.codTurmAlun;
     let res = await this.freqService
       .findFreqByTurmAlunIdTrimestre(codTurmAlun)
       .toPromise();
+    await loading.dismiss();
 
     if (res && res.length > 0) {
       this.freqList = res;
