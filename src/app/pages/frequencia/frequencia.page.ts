@@ -22,33 +22,40 @@ export class FrequenciaPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    let loading = await this.loadindCtrl.create({
-      message: "Carregando..."
-    });
-    await loading.present();
-    let codTurmAlun = this.dataProvider.storage.codTurmAlun;
-    let res = await this.freqService
-      .findFreqByTurmAlunIdTrimestre(codTurmAlun)
-      .toPromise();
-    await loading.dismiss();
-
-    if (res && res.length > 0) {
-      this.freqList = res;
-    } else {
-      const alert = await this.alertController.create({
-        header: "Nenhum registro de frequência encontrado.",
-        message: "Por favor entre em contato com a EMEB para mais informações.",
-        buttons: [
-          {
-            text: "Ok",
-            handler: () => {
-              this.router.navigate(["aluno"]);
-            }
-          }
-        ]
+    let loading = null;
+    try {
+      loading = await this.loadindCtrl.create({
+        message: "Carregando..."
       });
+      await loading.present();
+      let codTurmAlun = this.dataProvider.storage.codTurmAlun;
+      let res = await this.freqService
+        .findFreqByTurmAlunIdTrimestre(codTurmAlun)
+        .toPromise();
+      await loading.dismiss();
 
-      await alert.present();
+      if (res && res.length > 0) {
+        this.freqList = res;
+      } else {
+        const alert = await this.alertController.create({
+          header: "Nenhum registro de frequência encontrado.",
+          message:
+            "Por favor entre em contato com a EMEB para mais informações.",
+          buttons: [
+            {
+              text: "Ok",
+              handler: () => {
+                this.router.navigate(["aluno"]);
+              }
+            }
+          ]
+        });
+
+        await alert.present();
+      }
+    } catch (error) {
+      await loading.dismiss();
+      throw error;
     }
   }
 

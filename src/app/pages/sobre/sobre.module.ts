@@ -2,10 +2,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Router } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
-import { CalendarioPage } from "./calendario.page";
+import { SobrePage } from "./sobre.page";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { CalendarModule } from "ion2-calendar";
 import { AuthServiceProvider } from "src/app/services/auth.service";
 
 @NgModule({
@@ -13,9 +12,8 @@ import { AuthServiceProvider } from "src/app/services/auth.service";
     CommonModule,
     FormsModule,
     IonicModule,
-    CalendarModule,
-    RouterModule.forChild([{ path: "", component: CalendarioPage }])
+    RouterModule.forChild([{ path: "", component: SobrePage }])
   ],
-  declarations: [CalendarioPage]
+  declarations: [SobrePage]
 })
-export class CalendarioPageModule {}
+export class SobrePageModule {}

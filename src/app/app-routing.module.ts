@@ -70,6 +70,10 @@ const routes: Routes = [
   {
     path: 'frequencia-details',
     loadChildren: './pages/frequencia-details/frequencia-details.module#FrequenciaDetailsPageModule'
+  },
+  {
+    path: 'sobre',
+    loadChildren: './pages/sobre/sobre.module#SobrePageModule'
   }
 ];
 

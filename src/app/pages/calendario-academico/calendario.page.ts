@@ -4,7 +4,9 @@ import * as moment from "moment";
 import { CalendarioServiceProvider } from "src/app/services/calendario.service";
 import { CalendarioDTO } from "src/app/models/calendario.dto";
 import { environment } from "src/environments/environment";
-import { LoadingController } from '@ionic/angular';
+import { LoadingController } from "@ionic/angular";
+import { AuthServiceProvider } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-calendario",
@@ -21,39 +23,47 @@ export class CalendarioPage implements OnInit {
 
   constructor(
     private caleService: CalendarioServiceProvider,
-    private loadindCtrl: LoadingController
+    private loadindCtrl: LoadingController,
+    public authService: AuthServiceProvider,
+    private router: Router
   ) {}
 
   async ngOnInit() {
-    let loading = await this.loadindCtrl.create({
-      message: "Carregando..."
-    });
-    await loading.present();
-    moment.locale("pt-BR");
-
-    this.listCale = await this.caleService
-      .findCalendarioByAno(environment.ano)
-      .toPromise();
-
-    let _daysConfig: DayConfig[] = [];
-
-    this.listCale.forEach(value => {
-      _daysConfig.push({
-        date: moment(value.dataCale).toDate(),
-        cssClass: this.getColor(value)
+    let loading = null;
+    try {
+      loading = await this.loadindCtrl.create({
+        message: "Carregando..."
       });
-    });
+      await loading.present();
+      moment.locale("pt-BR");
 
-    this.optionsRange = {
-      pickMode: "single",
-      showAdjacentMonthDay: false,
-      weekdays: moment.weekdaysShort(),
-      monthPickerFormat: moment.monthsShort(),
-      from: moment(this.listCale[0].dataCale).toDate(),
-      to: moment(this.listCale[this.listCale.length - 1].dataCale).toDate(),
-      daysConfig: _daysConfig
-    };
-    await loading.dismiss();
+      this.listCale = await this.caleService
+        .findCalendarioByAno(environment.ano)
+        .toPromise();
+
+      let _daysConfig: DayConfig[] = [];
+
+      this.listCale.forEach(value => {
+        _daysConfig.push({
+          date: moment(value.dataCale).toDate(),
+          cssClass: this.getColor(value)
+        });
+      });
+
+      this.optionsRange = {
+        pickMode: "single",
+        showAdjacentMonthDay: false,
+        weekdays: moment.weekdaysShort(),
+        monthPickerFormat: moment.monthsShort(),
+        from: moment(this.listCale[0].dataCale).toDate(),
+        to: moment(this.listCale[this.listCale.length - 1].dataCale).toDate(),
+        daysConfig: _daysConfig
+      };
+      await loading.dismiss();
+    } catch (error) {
+      await loading.dismiss();
+      throw error;
+    }
   }
 
   onSelect($event) {
@@ -91,6 +101,16 @@ export class CalendarioPage implements OnInit {
       return "plantao-pedagogico";
     } else if (cale.idCale == "L") {
       return "recuperacao-final";
+    }
+  }
+
+  async voltar() {
+    let user_data = await this.authService.getUserData();
+
+    if (user_data.role == "ROLE_ALUN") {
+      this.router.navigate(["aluno"]);
+    } else {
+      this.router.navigate(["alunos"]);
     }
   }
 }

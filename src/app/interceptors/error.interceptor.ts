@@ -2,57 +2,59 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpEvent
+  HttpEvent,
+  HttpErrorResponse
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { ToastController } from "@ionic/angular";
+import { catchError } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private toastController: ToastController) {}
+  constructor(
+    private toastController: ToastController,
+    private router: Router
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    try {
-      return next.handle(req) as any;
-    } catch (error) {
-      console.log(error);
-      let errorObj = error;
+    let self = this;
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        switch (error.status) {
+          case 401:
+            let err = JSON.parse(error.error);
+            let hdr = err.error;
+            let msg = err.message;
+            self.presentToast(`${hdr}: ${msg}`);
+            break;
 
-      if (errorObj.error) {
-        errorObj = errorObj.error;
-      }
-      if (!errorObj.status) {
-        errorObj = JSON.parse(errorObj);
-      }
+          case 403:
+            self.presentToast(
+              "Sessão expirada: Realize o login novamente",
+              true
+            );
+            this.router.navigate(["login"]);
+            break;
 
-      switch (errorObj.staterrorus) {
-        case 401:
-          this.presentToast(
-            "Erro 401: falha de autenticação (Login ou senha incorretos)"
-          );
-          break;
+          default:
+            self.presentToast(`Erro ${error.status}: ${error.error}`, true);
+        }
 
-        case 403:
-          this.presentToast("Erro 403");
-          break;
-
-        default:
-          this.presentToast("Erro " + errorObj.status + ": " + errorObj.error);
-      }
-
-      return Observable.throw(error);
-    }
+        return throwError(error);
+      })
+    ) as any;
   }
 
-  async presentToast(msg) {
+  async presentToast(msg, bottom = false) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 2000,
-      position: "top"
+      duration: 3000,
+      position: bottom ? "bottom" : "top"
     });
     toast.present();
   }

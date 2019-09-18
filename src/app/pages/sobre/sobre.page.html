@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button (click)="voltar()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Sobre</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="md list-md hydrated">
+    <ion-item
+      ><ion-grid>
+        <ion-row justify-content-center align-items-center>
+          <ion-col align-self-center size="6">
+            <img
+              src="../../../assets/img/logo_dataci_nova.png"
+              alt="Logo Dataci"
+            />
+          </ion-col>
+          <ion-col size="4">
+            <img src="../../../assets/img/brasao.png" alt="Brasão PMCI" />
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center align-items-center>
+          <ion-col align-self-center size="6">
+            <img src="../../../assets/img/ifes.png" alt="Logo Ifes" />
+          </ion-col>
+        </ion-row> </ion-grid
+    ></ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text color="primary">
+              <div style="font-weight: bold; text-align: justify;">
+                Aplicativo desenvolvido através de Acordo de Cooperação Técnica
+                entre Ifes Campus Cachoeiro de Itapemirim e Companhia de
+                Tecnologia da Informação de Cachoeiro de Itapemirim - Dataci
+              </div>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            ><ion-text color="primary">
+              <b>Aluno:</b><br />Fernando Ribeiro Garioli
+            </ion-text></ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text color="primary">
+              <b>Professor Orientador:</b><br />Rafael Vargas Mesquita dos
+              Santos
+            </ion-text></ion-col
+          >
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text color="primary">
+              <b>Curso:</b><br />Sistemas de Informação
+            </ion-text></ion-col
+          >
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

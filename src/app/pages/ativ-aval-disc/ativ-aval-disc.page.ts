@@ -25,34 +25,42 @@ export class AtivAvalDiscPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    let loading = await this.loadindCtrl.create({
-      message: "Carregando..."
-    });
-    await loading.present();
-    let codTurmAlun = this.dataProvider.storage.codTurmAlun;
-    let res = await this.ativService
-      .findByTurmAlunIdTrimestre(codTurmAlun)
-      .toPromise();
-    await loading.dismiss();
+    let loading = null;
 
-    if (res && res.length > 0) {
-      this.listAtiv = res;
-      this.listDisc = this.ativService.getListDisc(this.listAtiv);
-    } else {
-      const alert = await this.alertController.create({
-        header: "Nenhuma atividade encontrada.",
-        message: "Por favor entre em contato com a EMEB para mais informações.",
-        buttons: [
-          {
-            text: "Ok",
-            handler: () => {
-              this.router.navigate(["aluno"]);
-            }
-          }
-        ]
+    try {
+      loading = await this.loadindCtrl.create({
+        message: "Carregando..."
       });
+      await loading.present();
+      let codTurmAlun = this.dataProvider.storage.codTurmAlun;
+      let res = await this.ativService
+        .findByTurmAlunIdTrimestre(codTurmAlun)
+        .toPromise();
+      await loading.dismiss();
 
-      await alert.present();
+      if (res && res.length > 0) {
+        this.listAtiv = res;
+        this.listDisc = this.ativService.getListDisc(this.listAtiv);
+      } else {
+        const alert = await this.alertController.create({
+          header: "Nenhuma atividade encontrada.",
+          message:
+            "Por favor entre em contato com a EMEB para mais informações.",
+          buttons: [
+            {
+              text: "Ok",
+              handler: () => {
+                this.router.navigate(["aluno"]);
+              }
+            }
+          ]
+        });
+
+        await alert.present();
+      }
+    } catch (error) {
+      await loading.dismiss();
+      throw error;
     }
   }
 

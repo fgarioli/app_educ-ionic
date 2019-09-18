@@ -41,26 +41,26 @@ export class LoginPage implements OnInit {
       if (user_data.role == "ROLE_RESP") {
         this.router.navigate(["alunos"]);
       } else if (user_data.role == "ROLE_ALUN") {
-        this.router.navigate([`/aluno/${user_data.user.codUsuario}`]);
+        this.router.navigate(["aluno"]);
       }
 
       await loading.dismiss();
     } catch (error) {
       await loading.dismiss();
-      let err = JSON.parse(error.error);
-      let hdr = err.error;
-      let msg = err.message;
-      const alert = await this.alertController.create({
-        header: hdr,
-        message: msg,
-        buttons: [
-          {
-            text: "Ok"
-          }
-        ]
-      });
+      // let err = JSON.parse(error.error);
+      // let hdr = err.error;
+      // let msg = err.message;
+      // const alert = await this.alertController.create({
+      //   header: hdr,
+      //   message: msg,
+      //   buttons: [
+      //     {
+      //       text: "Ok"
+      //     }
+      //   ]
+      // });
 
-      await alert.present();
+      // await alert.present();
     }
   }
 }

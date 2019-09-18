@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 
-// import { MensagensPage } from "../mensagens/mensagens.page";
-// import { EmebPage } from "../emeb/emeb.page";
-// import { FrequenciaPage } from "../frequencia/frequencia";
-// import { BoletimPage } from "../boletim/boletim.page";
 import { TurmAlunDTO } from "../../models/turmalun.dto";
 import { Router } from "@angular/router";
 import { DataProvider } from "src/app/providers/data.provider";
+import { AuthServiceProvider } from "src/app/services/auth.service";
+import { LoadingController } from "@ionic/angular";
+import { TurmalunServiceProvider } from "src/app/services/turmalun.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-aluno",
@@ -14,23 +14,46 @@ import { DataProvider } from "src/app/providers/data.provider";
   styleUrls: ["./aluno.page.scss"]
 })
 export class AlunoPage implements OnInit {
-  aluno: TurmAlunDTO;
+  aluno = {
+    nomeAluno: "",
+    codTurmAlun: null,
+    turma: { nomeTurm: "", emeb: { nomeEmeb: "" } }
+  };
+  menu: Promise<boolean>;
 
   constructor(
     private data: DataProvider,
-    private router: Router
+    private router: Router,
+    private authService: AuthServiceProvider,
+    private loadindCtrl: LoadingController,
+    private turmAlunService: TurmalunServiceProvider
   ) {}
 
   async ngOnInit() {
-    this.aluno = this.data.storage;
+    let loading = null;
+    try {
+      let user_data = await this.authService.getUserData();
 
-    // if (this.id) {
-    //   this.id = this.activateroute.snapshot.paramMap.get("id");
-    //   console.log("ID: ", this.id);
-    //   this.aluno = await this.turmAlunService
-    //     .findByAluno(this.id, "2018")
-    //     .toPromise();
-    // }
+      if (user_data.role == "ROLE_ALUN") {
+        this.menu = Promise.resolve(true);
+        let loading = await this.loadindCtrl.create({
+          message: "Carregando..."
+        });
+        await loading.present();
+
+        this.aluno = await this.turmAlunService
+          .findByAluno(user_data.user.codUsuario, environment.ano)
+          .toPromise();
+
+        await loading.dismiss();
+      } else {
+        this.menu = Promise.resolve(false);
+        this.aluno = this.data.storage;
+      }
+    } catch (error) {
+      await loading.dismiss();
+      throw error;
+    }
   }
 
   openGradeHorariaPage(codTurmAlun) {

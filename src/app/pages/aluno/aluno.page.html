@@ -13,7 +13,13 @@
     </ion-buttons> -->
     <ion-title>Aluno</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="alunos"> </ion-back-button>
+      <ion-menu-button
+        *ngIf="menu | async; else elseBlock"
+        autoHide="false"
+      ></ion-menu-button>
+      <ng-template #elseBlock
+        ><ion-back-button defaultHref="alunos"></ion-back-button
+      ></ng-template>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -26,18 +26,25 @@ export class AlunosPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    let loading = await this.loadindCtrl.create({
-      message: "Carregando..."
-    });
-    await loading.present();
-    let user_data = await this.authService.getUserData();
-    this.id = user_data.user.codUsuario;
-    // this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    let loading = null;
 
-    this.items = await this.turmAlunService
-      .findByResponsavel(this.id, environment.ano)
-      .toPromise();
-    await loading.dismiss();
+    try {
+      loading = await this.loadindCtrl.create({
+        message: "Carregando..."
+      });
+      await loading.present();
+      let user_data = await this.authService.getUserData();
+      this.id = user_data.user.codUsuario;
+      // this.id = this.activatedRoute.snapshot.paramMap.get("id");
+
+      this.items = await this.turmAlunService
+        .findByResponsavel(this.id, environment.ano)
+        .toPromise();
+      await loading.dismiss();
+    } catch (error) {
+      await loading.dismiss();
+      throw error;
+    }
   }
 
   navigate(aluno: TurmAlunDTO) {
