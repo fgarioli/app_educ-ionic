@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  api: "http://teste.cachoeiro.es.gov.br:8084/app_educ-rest",
-  whitelistedDomains: ["teste.cachoeiro.es.gov.br:8084"],
+  api: "http://producao.cachoeiro.es.gov.br:8084/app_educ-rest",
+  whitelistedDomains: ["producao.cachoeiro.es.gov.br:8084"],
   blacklistedRoutes: [
-    "teste.cachoeiro.es.gov.br:8084/app_educ-rest/login"
+    "producao.cachoeiro.es.gov.br:8084/app_educ-rest/login"
   ],
   ano: "2019"
 };
