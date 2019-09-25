@@ -60,12 +60,12 @@ const routes: Routes = [
     loadChildren: './pages/ativ-aval-details/ativ-aval-details.module#AtivAvalDetailsPageModule'
   },
   {
-    path: 'frequencia',
-    loadChildren: './pages/frequencia/frequencia.module#FrequenciaPageModule'
-  },
-  {
     path: 'frequencia-trimestre',
     loadChildren: './pages/frequencia-trimestre/frequencia-trimestre.module#FrequenciaTrimestrePageModule'
+  },
+  {
+    path: 'frequencia-trimestre-disciplina',
+    loadChildren: './pages/frequencia-trimestre-disciplina/frequencia-trimestre-disciplina.module#FrequenciaTrimestreDisciplinaPageModule'
   },
   {
     path: 'frequencia-details',

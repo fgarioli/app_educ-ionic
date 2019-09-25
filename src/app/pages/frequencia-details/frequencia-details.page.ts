@@ -1,7 +1,7 @@
-import { FrequenciaAulaDTO } from "../../models/frequencia-aula.dto";
 import Functions from "../../utils/functions.utils";
 import { Component, OnInit } from "@angular/core";
 import { DataProvider } from "src/app/providers/data.provider";
+import { FrequenciaDTO } from "src/app/models/frequencia.dto";
 
 @Component({
   selector: "app-frequencia-details",
@@ -9,13 +9,13 @@ import { DataProvider } from "src/app/providers/data.provider";
   styleUrls: ["./frequencia-details.page.scss"]
 })
 export class FrequenciaDetailsPage implements OnInit {
-  aulas: FrequenciaAulaDTO[];
-  trimestre;
+  freq: FrequenciaDTO[];
+  trimestre: number;
   private functions: Functions = new Functions();
 
   constructor(private dataProvider: DataProvider) {
     this.trimestre = this.dataProvider.storage.trimestre;
-    this.aulas = this.dataProvider.storage.aulas;
+    this.freq = this.dataProvider.storage.freq;
   }
 
   async ngOnInit() {}

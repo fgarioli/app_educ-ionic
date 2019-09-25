@@ -1,19 +1,22 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Selecione o Trimestre</ion-title>
+    <ion-title>Selecione a Disciplina</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="aluno"> </ion-back-button>
+      <ion-back-button defaultHref="frequencia"> </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="animated fadeIn common-bg">
+<ion-content padding>
   <ion-grid>
     <ion-row>
       <ion-col>
         <ion-card no-margin margin-bottom class="full-width">
           <ion-item class="border-bottom" text-wrap>
             <ion-label text-wrap>Ano Letivo: {{ anoLetivo }}</ion-label>
+          </ion-item>
+          <ion-item class="border-bottom" text-wrap>
+            <ion-label text-wrap>Trimestre: {{ trimestre }}º</ion-label>
           </ion-item>
           <ion-item class="border-bottom" text-wrap>
             <ion-label text-wrap>Total de Aulas: {{ totalAulas }}</ion-label>
@@ -29,26 +32,13 @@
     <ion-row>
       <ion-col>
         <ion-list>
-            <ion-item
-            (click)="openFreqTrimDiscPage(1)"
-            detail="true"
-            class="ios in-list ion-focusable item-label hydrated"
-          >
-            1º Trimestre
-          </ion-item>
           <ion-item
-            (click)="openFreqTrimDiscPage(2)"
+            *ngFor="let item of listFreq"
+            (click)="openDiscDetailPage(item)"
             detail="true"
             class="ios in-list ion-focusable item-label hydrated"
           >
-            2º Trimestre
-          </ion-item>
-          <ion-item
-            (click)="openFreqTrimDiscPage(3)"
-            detail="true"
-            class="ios in-list ion-focusable item-label hydrated"
-          >
-            3º Trimestre
+            {{ item.disciplina }}
           </ion-item>
         </ion-list>
       </ion-col>
