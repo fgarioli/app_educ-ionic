@@ -1,8 +1,9 @@
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { LoadingController, AlertController } from "@ionic/angular";
+import { LoadingController, AlertController, Platform } from "@ionic/angular";
 import { AuthServiceProvider } from "../../services/auth.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -14,17 +15,27 @@ export class LoginPage implements OnInit {
     username: ["", [Validators.required]],
     password: ["", [Validators.required]]
   });
+  subscription: Subscription;
 
   constructor(
     private router: Router,
     private loadindCtrl: LoadingController,
     private authService: AuthServiceProvider,
     private formBuilder: FormBuilder,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private platform: Platform
   ) {}
 
   async ngOnInit() {
     this.formGroup.reset();
+    // this.subscription = this.platform.backButton.subscribeWithPriority(
+    //   0,
+    //   () => {
+    //     navigator["app"].exitApp();
+    //     // code that is executed when the user pressed the back button
+    //     // and ionic doesn't already know what to do (close modals etc...)
+    //   }
+    // );
   }
 
   async login() {
@@ -63,4 +74,8 @@ export class LoginPage implements OnInit {
       // await alert.present();
     }
   }
+
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 }

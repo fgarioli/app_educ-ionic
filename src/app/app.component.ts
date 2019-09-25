@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Platform, MenuController } from "@ionic/angular";
+import { Platform, MenuController, NavController } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { AuthServiceProvider } from "./services/auth.service";
@@ -32,7 +32,8 @@ export class AppComponent {
     public authService: AuthServiceProvider,
     private router: Router,
     private menu: MenuController,
-    private dataProvider: DataProvider
+    private dataProvider: DataProvider,
+    private navCtrl: NavController
   ) {
     this.initializeApp();
   }
@@ -59,6 +60,7 @@ export class AppComponent {
     this.dataProvider.storage = null;
     await this.menu.toggle();
     await this.authService.logout();
-    await this.router.navigate(["/login"]);
+    await this.navCtrl.navigateRoot("/login");
+    // await this.router.navigate(["/login"]);
   }
 }

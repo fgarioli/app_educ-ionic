@@ -9,7 +9,7 @@ import { FrequenciaDTO } from "src/app/models/frequencia.dto";
   styleUrls: ["./frequencia-details.page.scss"]
 })
 export class FrequenciaDetailsPage implements OnInit {
-  freq: FrequenciaDTO[];
+  freq: FrequenciaDTO;
   trimestre: number;
   private functions: Functions = new Functions();
 
