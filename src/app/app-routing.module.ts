@@ -40,12 +40,12 @@ const routes: Routes = [
     loadChildren: './pages/mensagens-details/mensagens-details.module#MensagensDetailsPageModule'
   },
   {
-    path: 'boletim',
-    loadChildren: './pages/boletim/boletim.module#BoletimPageModule'
+    path: 'boletim-trimestre',
+    loadChildren: './pages/boletim-trimestre/boletim-trimestre.module#BoletimTrimestrePageModule'
   },
   {
-    path: 'boletim-details',
-    loadChildren: './pages/boletim-details/boletim-details.module#BoletimDetailsPageModule'
+    path: 'boletim-trimestre-disciplina',
+    loadChildren: './pages/boletim-trimestre-disciplina/boletim-trimestre-disciplina.module#BoletimTrimestreDisciplinaPageModule'
   },
   {
     path: 'ativ-aval-disc',

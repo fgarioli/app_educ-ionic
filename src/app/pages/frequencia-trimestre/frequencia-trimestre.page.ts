@@ -103,7 +103,7 @@ export class FrequenciaTrimestrePage implements OnInit {
     } else {
       const alert = await this.alertController.create({
         header:
-          "Nenhum registro de frequência encontrado para o semestre selecionado.",
+          "Nenhum registro de frequência encontrado para o trimestre selecionado.",
         message: "Por favor entre em contato com a EMEB para mais informações.",
         buttons: [
           {

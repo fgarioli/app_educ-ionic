@@ -68,7 +68,7 @@ export class AlunoPage implements OnInit {
 
   openBoletimPage(codTurmAlun) {
     this.data.storage = { codTurmAlun };
-    this.router.navigate(["boletim"]);
+    this.router.navigate(["boletim-trimestre"]);
   }
 
   openFrequenciaPage(codTurmAlun) {

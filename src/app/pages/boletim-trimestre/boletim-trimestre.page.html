@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Selecione o Trimestre</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="aluno"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card no-margin margin-bottom class="full-width">
+          <ion-item class="border-bottom" text-wrap>
+            <ion-label text-wrap>Ano Letivo: {{ anoLetivo }}</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item
+            (click)="openBoletimTrimestreDiscPage(1)"
+            detail="true"
+            class="ios in-list ion-focusable item-label hydrated"
+          >
+            1º Trimestre
+          </ion-item>
+          <ion-item
+            (click)="openBoletimTrimestreDiscPage(2)"
+            detail="true"
+            class="ios in-list ion-focusable item-label hydrated"
+          >
+            2º Trimestre
+          </ion-item>
+          <ion-item
+            (click)="openBoletimTrimestreDiscPage(3)"
+            detail="true"
+            class="ios in-list ion-focusable item-label hydrated"
+          >
+            3º Trimestre
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ trimestre }}º Trimestre</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="frequencia"> </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card no-margin margin-bottom class="full-width">
+          <ion-item class="border-bottom" text-wrap>
+            <ion-label text-wrap>Ano Letivo: {{ anoLetivo }}</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item
+            *ngFor="let item of boletim"
+            class="item ios in-list ion-focusable item-label hydrated"
+          >
+            <ion-label
+              class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated"
+              text-wrap
+            >
+              <h2>Disciplina: {{ item.disciplina }}</h2>
+              <h3>
+                Nota:
+                {{
+                  item.notaRec && item.notaRec > item.nota
+                    ? item.notaRec
+                    : item.nota
+                }}
+              </h3>
+              <h3 style="color: red;">Faltas: {{ item.qtdFaltas }}</h3>
+              <!-- <p style="text-align: justify">Conteúdo: {{ aula.conteudo }}</p> -->
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

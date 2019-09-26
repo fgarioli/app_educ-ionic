@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
-import { BoletimDetailsPage } from "./boletim-details.page";
+import { BoletimTrimestrePage } from "./boletim-trimestre.page";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
@@ -11,8 +11,8 @@ import { FormsModule } from "@angular/forms";
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([{ path: "", component: BoletimDetailsPage }])
+    RouterModule.forChild([{ path: "", component: BoletimTrimestrePage }])
   ],
-  declarations: [BoletimDetailsPage]
+  declarations: [BoletimTrimestrePage]
 })
-export class BoletimDetailsPageModule {}
+export class BoletimTrimestrePageModule {}
