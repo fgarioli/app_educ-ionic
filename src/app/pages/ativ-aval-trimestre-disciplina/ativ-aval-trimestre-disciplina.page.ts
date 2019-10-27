@@ -1,19 +1,19 @@
+import Functions from "../../utils/functions.utils";
 import { Component, OnInit } from "@angular/core";
+import { AtividadeAvaliativaDTO } from "../../models/ativ.dto";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
+import { DisciplinaDTO } from "src/app/models/disciplina.dto";
 import { environment } from "src/environments/environment";
 import { LoadingController, AlertController } from "@ionic/angular";
-import { FrequenciaServiceProvider } from "src/app/services/frequencia.service";
-import { DisciplinaDTO } from "src/app/models/disciplina.dto";
+import { AtivServiceProvider } from "src/app/services/ativ.service";
 
 @Component({
-  selector: "app-frequencia-trimestre-disciplina",
-  templateUrl: "frequencia-trimestre-disciplina.page.html",
-  styleUrls: ["./frequencia-trimestre-disciplina.page.scss"]
+  selector: "app-ativ-aval-trimestre-disciplina",
+  templateUrl: "ativ-aval-trimestre-disciplina.page.html",
+  styleUrls: ["./ativ-aval-trimestre-disciplina.page.scss"]
 })
-export class FrequenciaTrimestreDisciplinaPage implements OnInit {
-  totalAulas: number = 0;
-  totalFaltas: number = 0;
+export class AtivAvalTrimestreDisciplinaPage implements OnInit {
   anoLetivo = environment.ano;
   listDisc: DisciplinaDTO[] = [];
   trimestre: number;
@@ -24,7 +24,7 @@ export class FrequenciaTrimestreDisciplinaPage implements OnInit {
     private router: Router,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
-    private freqService: FrequenciaServiceProvider
+    private ativService: AtivServiceProvider
   ) {
     this.trimestre = this.dataProvider.storage.trimestre;
     this.idTurmAlun = this.dataProvider.storage.idTurmAlun;
@@ -37,11 +37,8 @@ export class FrequenciaTrimestreDisciplinaPage implements OnInit {
         message: "Carregando..."
       });
       await loading.present();
-      this.totalFaltas = await this.freqService
-        .getFaltasByTrimetre(this.idTurmAlun, this.trimestre)
-        .toPromise();
 
-      let res = await this.freqService
+      let res = await this.ativService
         .getListDisciplina(this.idTurmAlun, this.trimestre)
         .toPromise();
       await loading.dismiss();
@@ -49,14 +46,14 @@ export class FrequenciaTrimestreDisciplinaPage implements OnInit {
         this.listDisc = res;
       } else {
         const alert = await this.alertController.create({
-          header: "Nenhuma frequência lançada em nenhuma disciplina.",
+          header: "Nenhuma atividade lançada em nenhuma disciplina.",
           message:
             "Por favor entre em contato com a EMEB para mais informações.",
           buttons: [
             {
               text: "Ok",
               handler: () => {
-                this.router.navigate(["frequencia-trimestre"]);
+                this.router.navigate(["ativ-aval-trimestre"]);
               }
             }
           ]
@@ -75,6 +72,6 @@ export class FrequenciaTrimestreDisciplinaPage implements OnInit {
       trimestre: this.trimestre,
       idTurmAlun: this.idTurmAlun
     };
-    this.router.navigate(["frequencia-details"]);
+    this.router.navigate(["ativ-aval-details"]);
   }
 }

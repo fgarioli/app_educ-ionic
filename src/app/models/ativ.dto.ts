@@ -1,10 +1,7 @@
 export interface AtividadeAvaliativaDTO {
-    codAtiv: string;
-    dataAtiv: string;
-    periodo: string;
-    tipo: string;
-    valor: string;
-    nota: string;
-    notaDescr: string;
-    disciplina: string;
+  descricao: string;
+  data: string;
+  valor: number;
+  nota: number;
+  notaDescr: string;
 }

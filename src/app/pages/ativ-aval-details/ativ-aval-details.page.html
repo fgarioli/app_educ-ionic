@@ -1,41 +1,46 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>{{ ativ.tipo }} de {{ ativ.disciplina }}</ion-title>
+    <ion-title>Atividades Avaliativas</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="ativ-aval"> </ion-back-button>
+      <ion-back-button defaultHref="frequencia"> </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list class="md list-md hydrated">
-    <ion-item>
-      <ion-label
-        color="primary"
-        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-        >Trimestre: {{ ativ.periodo }}</ion-label
-      >
-    </ion-item>
-    <ion-item>
-      <ion-label
-        color="primary"
-        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-        >Data: {{ functions.dateFormat(ativ.dataAtiv) }}</ion-label
-      >
-    </ion-item>
-    <ion-item>
-      <ion-label
-        color="primary"
-        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-        >Valor: {{ ativ.valor }}</ion-label
-      >
-    </ion-item>
-    <ion-item>
-      <ion-label
-        color="primary"
-        class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
-        >Nota: {{ ativ.nota == "" ? ativ.notaDescr : ativ.nota }}</ion-label
-      >
-    </ion-item>
-  </ion-list>
+<ion-content padding class="animated fadeIn common-bg">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card no-margin margin-bottom class="full-width">
+          <ion-item class="border-bottom" text-wrap>
+            <ion-label text-wrap>Disciplina: {{ disc.disciplina }}</ion-label>
+          </ion-item>
+          <ion-item class="border-bottom" text-wrap>
+            <ion-label text-wrap>Trimestre: {{ trimestre }}º</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-row>
+        <ion-list class="md list-md hydrated">
+          <ion-item
+            class="item ios in-list ion-focusable item-label hydrated"
+            *ngFor="let ativ of listAtiv"
+          >
+            <ion-label
+              class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated"
+              text-wrap
+            >
+              <h2>Data: {{ functions.dateFormat(ativ.data) }}</h2>
+              <p style="text-align: justify">Descrição: {{ ativ.descricao }}</p>
+              <h3>Valor: {{ ativ.valor }}</h3>
+              <h3 *ngIf="ativ.nota != null">Nota: {{ ativ.nota }}</h3>
+              <h3 *ngIf="ativ.notaDescr != null" style="text-align: justify">Nota descritiva: {{ ativ.notaDescr }}</h3>              
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
 </ion-content>

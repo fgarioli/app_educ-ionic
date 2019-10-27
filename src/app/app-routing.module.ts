@@ -52,8 +52,12 @@ const routes: Routes = [
     loadChildren: './pages/ativ-aval-disc/ativ-aval-disc.module#AtivAvalDiscPageModule'
   },
   {
-    path: 'ativ-aval',
-    loadChildren: './pages/ativ-aval/ativ-aval.module#AtivAvalPageModule'
+    path: 'ativ-aval-trimestre',
+    loadChildren: './pages/ativ-aval-trimestre/ativ-aval-trimestre.module#AtivAvalTrimestrePageModule'
+  },
+  {
+    path: 'ativ-aval-trimestre-disciplina',
+    loadChildren: './pages/ativ-aval-trimestre-disciplina/ativ-aval-trimestre-disciplina.module#AtivAvalTrimestreDisciplinaPageModule'
   },
   {
     path: 'ativ-aval-details',
@@ -74,6 +78,10 @@ const routes: Routes = [
   {
     path: 'sobre',
     loadChildren: './pages/sobre/sobre.module#SobrePageModule'
+  },
+  {
+    path: 'novo-ensino-medio',
+    loadChildren: './pages/novo-ensino-medio/novo-ensino-medio.module#NovoEnsinoMedioPageModule'
   }
 ];
 

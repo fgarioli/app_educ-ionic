@@ -5,6 +5,9 @@
     <author email="f.ribeirogarioli@gmail.com" href="https://github.com/fgarioli/app_educ">Fernando Garioli</author>
     <content src="index.html" />
     <access origin="*" />
+    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+        <application android:usesCleartextTraffic="true" />
+    </edit-config>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

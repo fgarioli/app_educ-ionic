@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
 
-import { AtivAvalDiscPage } from "./ativ-aval-disc.page";
+import { AtivAvalTrimestrePage } from "./ativ-aval-trimestre.page";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
@@ -11,8 +11,8 @@ import { FormsModule } from "@angular/forms";
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([{ path: "", component: AtivAvalDiscPage }])
+    RouterModule.forChild([{ path: "", component: AtivAvalTrimestrePage }])
   ],
-  declarations: [AtivAvalDiscPage]
+  declarations: [AtivAvalTrimestrePage]
 })
-export class AtivAvalDiscPageModule {}
+export class AtivAvalTrimestrePageModule {}

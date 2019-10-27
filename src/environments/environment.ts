@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // api: 'http://localhost:8080/app_educ-rest',
-  // api: 'http://192.168.25.9:8080/app_educ-rest'
+  // api: 'http://192.168.25.7:8080/app_educ-rest',
   api: "http://teste.cachoeiro.es.gov.br:8085/app_educ-rest",
   whitelistedDomains: ["teste.cachoeiro.es.gov.br:8085", "localhost:8080"],
   blacklistedRoutes: [
