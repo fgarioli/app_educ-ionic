@@ -48,10 +48,6 @@ const routes: Routes = [
     loadChildren: './pages/boletim-trimestre-disciplina/boletim-trimestre-disciplina.module#BoletimTrimestreDisciplinaPageModule'
   },
   {
-    path: 'ativ-aval-disc',
-    loadChildren: './pages/ativ-aval-disc/ativ-aval-disc.module#AtivAvalDiscPageModule'
-  },
-  {
     path: 'ativ-aval-trimestre',
     loadChildren: './pages/ativ-aval-trimestre/ativ-aval-trimestre.module#AtivAvalTrimestrePageModule'
   },

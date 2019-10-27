@@ -76,6 +76,11 @@ export class AlunoPage implements OnInit {
     this.router.navigate(["frequencia-trimestre"]);
   }
 
+  openClassPage(codTurmAlun) {
+    this.data.storage = { codTurmAlun };
+    this.router.navigate(["novo-ensino-medio"]);
+  }
+
   // openEmebPage(aluno) {
   //   this.router.navigate(["/emeb", { aluno: aluno }]);
   // }

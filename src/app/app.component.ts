@@ -19,11 +19,6 @@ export class AppComponent {
       icon: "calendar"
     },
     {
-      title: "Novo Ensino Médio",
-      url: "/novo-ensino-medio",
-      icon: "bulb"
-    },
-    {
       title: "Sobre",
       url: "/sobre",
       icon: "information-circle-outline"

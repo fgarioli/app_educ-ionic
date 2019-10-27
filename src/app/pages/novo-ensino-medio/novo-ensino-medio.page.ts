@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { AlertController } from "@ionic/angular";
 import { DataProvider } from "src/app/providers/data.provider";
 import { Router } from "@angular/router";
-import { GradeHorariaServiceProvider } from "src/app/services/grade-horaria.service";
-import { MensagemServiceProvider } from "src/app/services/mensagem.service";
-import { AuthServiceProvider } from "src/app/services/auth.service";
 import { Chart } from "chart.js";
+import { ClassServiceProvider } from "src/app/services/class.service";
+import { LoadingController } from "@ionic/angular";
 
 @Component({
   selector: "app-novo-ensino-medio",
@@ -16,17 +14,36 @@ export class NovoEnsinoMedioPage implements OnInit {
   @ViewChild("barChart") barChart;
 
   chart: any;
+  idTurmAlun: number;
 
   constructor(
     private dataProvider: DataProvider,
     private router: Router,
-    public gradeHorariaService: GradeHorariaServiceProvider,
-    private msgService: MensagemServiceProvider,
-    private authService: AuthServiceProvider,
-    private alertController: AlertController
-  ) {}
+    private classService: ClassServiceProvider,
+    private loadingCtrl: LoadingController
+  ) {
+    this.idTurmAlun = this.dataProvider.storage.codTurmAlun;
+  }
 
   async ngOnInit() {
+    let loading = null;
+    try {
+      loading = await this.loadingCtrl.create({
+        message: "Carregando..."
+      });
+      await loading.present();
+      let result = await this.classService
+        .classify(this.idTurmAlun)
+        .toPromise();
+      this.generateChart(result);
+      await loading.dismiss();
+    } catch (error) {
+      await loading.dismiss();
+      throw error;
+    }
+  }
+
+  generateChart(result) {
     this.chart = new Chart(this.barChart.nativeElement, {
       type: "bar",
       data: {
@@ -38,7 +55,7 @@ export class NovoEnsinoMedioPage implements OnInit {
         ],
         datasets: [
           {
-            data: [18, 10, 3, 70],
+            data: [result[0]*100, result[1]*100, result[2]*100, result[3]*100],
             backgroundColor: [
               "rgb(38, 194, 129)",
               "rgb(255, 99, 132)",
@@ -73,7 +90,7 @@ export class NovoEnsinoMedioPage implements OnInit {
         },
         legend: {
           display: false,
-          position: 'bottom',
+          position: "bottom",
           boxWidth: 40
         }
       }
@@ -81,12 +98,6 @@ export class NovoEnsinoMedioPage implements OnInit {
   }
 
   async voltar() {
-    let user_data = await this.authService.getUserData();
-
-    if (user_data.role == "ROLE_ALUN") {
-      this.router.navigate(["aluno"]);
-    } else {
-      this.router.navigate(["alunos"]);
-    }
+    this.router.navigate(["aluno"]);
   }
 }
